@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#062033"/>
+      <stop offset="55%" stop-color="#0A3A5C"/>
+      <stop offset="100%" stop-color="#1A5A7A"/>
+    </linearGradient>
+    <linearGradient id="brick" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0E4A6E"/>
+      <stop offset="100%" stop-color="#0A3554"/>
+    </linearGradient>
+    <pattern id="bricks" width="80" height="40" patternUnits="userSpaceOnUse">
+      <rect width="80" height="40" fill="url(#brick)"/>
+      <path d="M0 20h80M40 0v20M0 40h80" stroke="#0A2F4A" stroke-width="1.5" opacity="0.55"/>
+      <circle cx="20" cy="10" r="1.2" fill="#D4AF37" opacity="0.35"/>
+      <circle cx="60" cy="30" r="1.2" fill="#D4AF37" opacity="0.35"/>
+    </pattern>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F0D78C"/>
+      <stop offset="50%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#A8892A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1400" height="900" fill="url(#sky)"/>
+  <!-- Distant dunes -->
+  <path d="M0 720 Q200 660 400 700 T800 690 T1200 710 T1400 680 V900 H0Z" fill="#C4A882" opacity="0.35"/>
+  <path d="M0 760 Q300 700 600 740 T1100 720 T1400 750 V900 H0Z" fill="#B8956E" opacity="0.45"/>
+  <!-- Gate structure -->
+  <g transform="translate(280,80)">
+    <rect x="0" y="120" width="840" height="620" fill="url(#bricks)" stroke="#D4AF37" stroke-width="3"/>
+    <!-- Crowning battlements -->
+    <g fill="url(#bricks)" stroke="#D4AF37" stroke-width="2">
+      <rect x="-20" y="60" width="100" height="70"/>
+      <rect x="100" y="40" width="100" height="90"/>
+      <rect x="220" y="60" width="100" height="70"/>
+      <rect x="340" y="30" width="160" height="100"/>
+      <rect x="520" y="60" width="100" height="70"/>
+      <rect x="640" y="40" width="100" height="90"/>
+      <rect x="760" y="60" width="100" height="70"/>
+    </g>
+    <!-- Arch opening -->
+    <path d="M220 740 V380 Q220 220 420 220 Q620 220 620 380 V740 Z" fill="#062033"/>
+    <path d="M240 740 V390 Q240 250 420 250 Q600 250 600 390 V740" fill="none" stroke="url(#gold)" stroke-width="6"/>
+    <!-- Lion reliefs left -->
+    <g transform="translate(40,280)" fill="none" stroke="#D4AF37" stroke-width="2.5" opacity="0.85">
+      <path d="M20 120 C40 80 80 70 110 90 C130 60 170 70 180 100 L200 140 L160 150 L140 180 L60 170 Z"/>
+      <circle cx="155" cy="95" r="4" fill="#D4AF37"/>
+      <path d="M110 90 L100 50 L120 55"/>
+    </g>
+    <!-- Lion reliefs right -->
+    <g transform="translate(640,280) scale(-1,1) translate(-200,0)" fill="none" stroke="#D4AF37" stroke-width="2.5" opacity="0.85">
+      <path d="M20 120 C40 80 80 70 110 90 C130 60 170 70 180 100 L200 140 L160 150 L140 180 L60 170 Z"/>
+      <circle cx="155" cy="95" r="4" fill="#D4AF37"/>
+      <path d="M110 90 L100 50 L120 55"/>
+    </g>
+    <!-- Equipment silhouettes in arch -->
+    <g transform="translate(320,420)" fill="#0A4A6A" stroke="#7EB8D4" stroke-width="2" opacity="0.9">
+      <rect x="20" y="40" width="160" height="12" rx="2"/>
+      <circle cx="40" cy="46" r="28"/>
+      <circle cx="160" cy="46" r="28"/>
+      <rect x="70" y="100" width="60" height="100" rx="4"/>
+      <rect x="55" y="90" width="90" height="14" rx="2"/>
+    </g>
+  </g>
+  <!-- Foreground sand -->
+  <path d="M0 820 Q350 780 700 810 T1400 800 V900 H0Z" fill="#D6C4A8"/>
+</svg>
