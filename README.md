@@ -1,18 +1,36 @@
 # Metroplex Construction Services
 
-Single-page website for a commercial and residential general contractor.
+Website for a commercial and residential general contractor, with a project gallery and an admin panel for managing it.
 
-## Stack
+- React + Vite + TypeScript + Tailwind CSS
+- Supabase for admin login, the gallery table, and image storage
+- Contact details live in `src/lib/company.ts`
 
-- HTML / CSS / vanilla JavaScript, with no build step and no dependencies
-- Contact details live in one place: `assets/js/company.js`
-- The estimate form opens the visitor's email app with the request pre-filled (no backend)
-- Photos are loaded from Unsplash by URL
+## Routes
 
-## Run locally
+| Path | Page |
+|------|------|
+| `/` | Homepage (featured projects pulled from Supabase) |
+| `/gallery` | Full project gallery with category filters and lightbox |
+| `/admin/login` | Admin sign-in |
+| `/admin` | Dashboard, gallery management, add/edit projects |
+
+## Supabase setup
+
+1. Create a free project at [supabase.com](https://supabase.com).
+2. In **SQL Editor**, run `supabase/gallery-setup.sql`. It creates the table, the `project-gallery` bucket, and the security policies.
+3. In **Authentication > Sign In / Providers**, turn off **Allow new users to sign up**.
+4. In **Authentication > Users**, add the admin user, then approve them in the SQL Editor:
+   ```sql
+   insert into public.admin_users (user_id)
+   select id from auth.users where email = 'management@metroplex-services.com';
+   ```
+5. Copy `.env.example` to `.env` and fill in the project URL and **anon** key from **Project Settings > API**. Add the same two variables in Vercel under **Settings > Environment Variables**. Never use the service-role key here.
+
+## Development
 
 ```bash
-python3 -m http.server 8080
+npm install
+npm run dev
+npm run build
 ```
-
-Then visit http://localhost:8080

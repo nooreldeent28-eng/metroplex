@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Manrope";
-  src: url("../fonts/Manrope-Variable.ttf") format("truetype");
+  src: url("/fonts/Manrope-Variable.ttf") format("truetype");
   font-weight: 200 800;
   font-display: swap;
 }
@@ -43,7 +43,7 @@ h1, h2, h3, h4 { margin: 0; line-height: 1.1; color: var(--dark); letter-spacing
 p { margin: 0; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
 
-.container { width: min(1200px, 100% - 2.5rem); margin-inline: auto; }
+.container { width: min(1200px, 100% - 2.5rem); max-width: none; margin-inline: auto; }
 
 /* Buttons */
 .btn {
@@ -109,7 +109,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   width: 40px;
   height: 40px;
   flex-shrink: 0;
-  background: var(--dark) url("../images/favicon.svg") center / 100% no-repeat;
+  background: var(--dark) url("/favicon.svg") center / 100% no-repeat;
 }
 .brand-text { display: flex; flex-direction: column; line-height: 1; }
 .brand-name { font-size: 1.35rem; font-weight: 800; letter-spacing: 0.06em; color: var(--dark); }

@@ -1,4 +1,4 @@
-const company = {
+export const company = {
   name: "Metroplex Construction Services",
   phone: "469-264-9826",
   phoneHref: "tel:+14692649826",

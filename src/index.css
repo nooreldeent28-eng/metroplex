@@ -1,0 +1,17 @@
+@import "tailwindcss";
+@import "./styles/site.css" layer(components);
+
+@theme {
+  --color-dark: #181818;
+  --color-charcoal: #262626;
+  --color-warm: #f7f6f2;
+  --color-orange: #e85d04;
+  --color-orange-dark: #c94f02;
+  --color-amber: #f59e0b;
+  --font-sans: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+@utility container {
+  width: min(1200px, 100% - 2.5rem);
+  margin-inline: auto;
+}
