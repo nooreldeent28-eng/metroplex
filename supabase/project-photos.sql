@@ -59,3 +59,5 @@ drop trigger if exists gallery_project_photos_limit on public.gallery_project_ph
 create trigger gallery_project_photos_limit
   before insert on public.gallery_project_photos
   for each row execute function public.enforce_project_photo_limit();
+
+notify pgrst, 'reload schema';
