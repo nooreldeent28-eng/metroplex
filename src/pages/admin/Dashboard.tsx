@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { countNewRequests } from "../../lib/estimates";
 import { fetchProjects, type GalleryProject } from "../../lib/gallery";
 import { Link } from "../../lib/router";
 import { cardCls } from "./ui";
@@ -6,9 +7,11 @@ import { cardCls } from "./ui";
 export function Dashboard() {
   const [projects, setProjects] = useState<GalleryProject[] | null>(null);
   const [error, setError] = useState("");
+  const [newRequests, setNewRequests] = useState<number | string>("–");
 
   useEffect(() => {
     fetchProjects().then(setProjects).catch((e) => setError(e.message));
+    countNewRequests().then(setNewRequests).catch(() => {});
   }, []);
 
   const stats = projects && [
@@ -29,7 +32,11 @@ export function Dashboard() {
 
       {error && <p className="mt-6 font-semibold text-red-700">{error}</p>}
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-3">
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <Link to="/admin/requests" className={`${cardCls} border-t-4 border-t-dark p-5 hover:shadow-md`}>
+          <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-slate-500">New Estimate Requests</p>
+          <p className="mt-2 text-4xl font-extrabold text-orange">{newRequests}</p>
+        </Link>
         {(stats || [["Total Projects", "–"], ["Featured on Homepage", "–"], ["Categories Used", "–"]]).map(([label, value]) => (
           <div key={label} className={`${cardCls} border-t-4 border-t-orange p-5`}>
             <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-slate-500">{label}</p>

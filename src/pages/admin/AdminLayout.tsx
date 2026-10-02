@@ -9,9 +9,11 @@ const NAV = [
   { to: "/admin/gallery", label: "Gallery" },
   { to: "/admin/new", label: "Add Project" },
   { to: "/admin/site-photos", label: "Site Photos" },
+  { to: "/admin/requests", label: "Estimate Requests" },
+  { to: "/admin/estimates", label: "Estimates" },
 ];
 
-export function AdminLayout({ children }: { children: ReactNode }) {
+export function AdminLayout({ children, bare = false }: { children: ReactNode; bare?: boolean }) {
   const auth = useAdminSession();
   const path = usePath();
 
@@ -23,6 +25,8 @@ export function AdminLayout({ children }: { children: ReactNode }) {
   if (auth.status !== "admin") {
     return <p className="flex min-h-screen items-center justify-center bg-warm font-semibold text-slate-500">Checking access…</p>;
   }
+
+  if (bare) return <>{children}</>;
 
   const logout = async () => {
     await supabase?.auth.signOut();

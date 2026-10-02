@@ -11,6 +11,40 @@
   --font-sans: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
+@page {
+  size: A4;
+  margin: 14mm 14mm 16mm;
+}
+
+.estimate-sheet {
+  min-height: 297mm;
+  padding: 14mm;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.estimate-watermark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.05;
+}
+
+@media print {
+  .estimate-sheet {
+    width: auto;
+    min-height: 0;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .estimate-watermark {
+    position: fixed;
+  }
+}
+
 @utility container {
   width: min(1200px, 100% - 2.5rem);
   margin-inline: auto;
