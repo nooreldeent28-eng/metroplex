@@ -12,6 +12,7 @@ import {
   type GalleryProject,
 } from "../../lib/gallery";
 import { Link, navigate } from "../../lib/router";
+import { PhotoManager } from "./PhotoManager";
 import { cardCls, inputCls, labelCls } from "./ui";
 
 type Stage = "idle" | "uploading" | "saving";
@@ -83,10 +84,11 @@ export function ProjectForm({ id }: { id?: string }) {
       if (existing) {
         await updateProject(existing.id, uploaded ? { ...fields, image_url: uploaded.url, image_path: uploaded.path } : fields);
         if (uploaded && existing.image_path) await removeImage(existing.image_path);
+        navigate("/admin/gallery");
       } else {
-        await createProject({ ...fields, image_url: uploaded!.url, image_path: uploaded!.path });
+        const newId = await createProject({ ...fields, image_url: uploaded!.url, image_path: uploaded!.path });
+        navigate(`/admin/edit/${newId}`);
       }
-      navigate("/admin/gallery");
     } catch (err) {
       if (uploaded) await removeImage(uploaded.path).catch(() => {});
       setError(err instanceof Error ? err.message : "Could not save the project.");
@@ -137,7 +139,8 @@ export function ProjectForm({ id }: { id?: string }) {
         </div>
 
         <div className={`${cardCls} flex flex-col gap-4 p-6`}>
-          <p className="text-sm font-bold text-dark">Project Image {existing ? "" : "*"}</p>
+          <p className="text-sm font-bold text-dark">Main Photo {existing ? "" : "*"}</p>
+          <p className="-mt-3 text-xs text-slate-500">Shown on the gallery card and homepage.</p>
           <div className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded border border-dashed border-[#d4d2cb] bg-warm">
             {preview ? (
               <img src={preview} alt="Preview" className="h-full w-full object-cover" />
@@ -154,10 +157,13 @@ export function ProjectForm({ id }: { id?: string }) {
           {error && <p className="text-sm font-semibold text-red-700" role="alert">{error}</p>}
 
           <button className="btn btn-primary btn-lg btn-block mt-auto" type="submit" disabled={busy}>
-            {stage === "uploading" ? "Compressing & uploading…" : stage === "saving" ? "Saving…" : existing ? "Save Changes" : "Add Project"}
+            {stage === "uploading" ? "Compressing & uploading…" : stage === "saving" ? "Saving…" : existing ? "Save Changes" : "Save & Add Photos"}
           </button>
+          {!existing && <p className="text-center text-xs text-slate-500">You can add before &amp; after photos on the next screen.</p>}
         </div>
       </form>
+
+      {existing && <PhotoManager projectId={existing.id} />}
     </>
   );
 }

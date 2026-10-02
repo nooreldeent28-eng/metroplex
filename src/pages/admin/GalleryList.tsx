@@ -86,7 +86,7 @@ export function GalleryList() {
               <div className="min-w-0 flex-1">
                 <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-orange">{p.category}</p>
                 <p className="truncate text-lg font-extrabold text-dark">{p.title}</p>
-                <p className="truncate text-sm text-slate-500">{p.location || "No location"} · Order {p.display_order}</p>
+                <p className="truncate text-sm text-slate-500">{p.location || "No location"} · {p.photo_count ?? 0} before/after photos · Order {p.display_order}</p>
               </div>
               <div className="flex flex-wrap items-center gap-2">
                 {filter === "All" && (

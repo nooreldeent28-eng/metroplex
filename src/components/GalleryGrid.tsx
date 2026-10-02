@@ -15,13 +15,18 @@ export function GalleryGrid({ projects }: { projects: GalleryProject[] }) {
               onClick={() => setActive(i)}
               className="group flex h-full w-full flex-col overflow-hidden rounded border border-[#e4e2dc] bg-white text-left shadow-sm transition-shadow hover:shadow-lg"
             >
-              <span className="block aspect-[4/3] w-full overflow-hidden bg-charcoal">
+              <span className="relative block aspect-[4/3] w-full overflow-hidden bg-charcoal">
                 <img
                   src={p.image_url}
                   alt={p.title}
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
+                {!!p.photo_count && (
+                  <span className="absolute bottom-3 left-3 rounded bg-dark/85 px-2.5 py-1 text-xs font-bold text-white">
+                    Before &amp; After · {p.photo_count + 1} photos
+                  </span>
+                )}
               </span>
               <span className="flex flex-1 flex-col border-t-4 border-orange p-5">
                 <span className="text-xs font-extrabold uppercase tracking-[0.14em] text-orange">{p.category}</span>
