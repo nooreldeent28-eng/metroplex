@@ -10,6 +10,7 @@ import { AdminLogin } from "./pages/admin/AdminLogin";
 import { Dashboard } from "./pages/admin/Dashboard";
 import { GalleryList } from "./pages/admin/GalleryList";
 import { ProjectForm } from "./pages/admin/ProjectForm";
+import { SitePhotos } from "./pages/admin/SitePhotos";
 
 const HOME_TITLE = `${company.name} | Commercial & Residential General Contractor`;
 
@@ -17,6 +18,7 @@ function adminPage(path: string) {
   if (path === "/admin") return <Dashboard />;
   if (path === "/admin/gallery") return <GalleryList />;
   if (path === "/admin/new") return <ProjectForm key="new" />;
+  if (path === "/admin/site-photos") return <SitePhotos />;
   const edit = path.match(/^\/admin\/edit\/([\w-]+)$/);
   if (edit) return <ProjectForm key={edit[1]} id={edit[1]} />;
   return null;

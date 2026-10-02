@@ -155,9 +155,9 @@ export function validateImage(file: File): string | null {
   return null;
 }
 
-export async function compressImage(file: File): Promise<{ blob: Blob; ext: string }> {
+export async function compressImage(file: File, maxSize = MAX_DIMENSION): Promise<{ blob: Blob; ext: string }> {
   const bitmap = await createImageBitmap(file);
-  const scale = Math.min(1, MAX_DIMENSION / Math.max(bitmap.width, bitmap.height));
+  const scale = Math.min(1, maxSize / Math.max(bitmap.width, bitmap.height));
   const canvas = document.createElement("canvas");
   canvas.width = Math.round(bitmap.width * scale);
   canvas.height = Math.round(bitmap.height * scale);
@@ -174,8 +174,8 @@ export async function compressImage(file: File): Promise<{ blob: Blob; ext: stri
   return { blob: file, ext: file.name.split(".").pop() || "jpg" };
 }
 
-export async function uploadImage(file: File, folder = "projects") {
-  const { blob, ext } = await compressImage(file);
+export async function uploadImage(file: File, folder = "projects", maxSize?: number) {
+  const { blob, ext } = await compressImage(file, maxSize);
   const base = file.name
     .replace(/\.[^.]+$/, "")
     .toLowerCase()

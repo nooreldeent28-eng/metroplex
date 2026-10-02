@@ -2,21 +2,20 @@ import { useEffect, type CSSProperties } from "react";
 import { company } from "../lib/company";
 import { ContactForm } from "../components/ContactForm";
 import { FeaturedProjects } from "../components/FeaturedProjects";
-
-const img = (id: string, w = 900) => `https://images.unsplash.com/photo-${id}?w=${w}&q=70&auto=format&fit=crop`;
+import { useSiteImages, type SiteImageKey } from "../lib/siteImages";
 
 const GC_CARDS = [
   {
     kicker: "Commercial",
     title: "Commercial General Contracting",
-    src: img("1497366216548-37526070297c"),
+    image: "gc_commercial" as SiteImageKey,
     alt: "Finished commercial office interior",
     items: ["Commercial Improvements", "Interior Construction", "Renovations", "Property Repairs", "Multi-Trade Coordination", "Facility Improvements"],
   },
   {
     kicker: "Residential",
     title: "Residential General Contracting",
-    src: img("1600585154340-be6161a56a0c"),
+    image: "gc_residential" as SiteImageKey,
     alt: "Modern residential home exterior",
     items: ["Home Renovations", "Remodeling", "Repairs", "Interior Improvements", "Property Upgrades", "Multi-Trade Projects"],
   },
@@ -39,14 +38,14 @@ const SPLIT = [
     title: "Commercial",
     text: "Office, retail, and facility improvements managed with clear schedules, coordinated trades, and minimal disruption to your operations.",
     cta: "Start a Commercial Project",
-    bg: img("1504307651254-35680f356dfd", 1200),
+    image: "split_commercial" as SiteImageKey,
   },
   {
     eyebrow: "For Homeowners",
     title: "Residential",
     text: "Renovations, remodels, repairs, and upgrades handled with respect for your home, your schedule, and your budget.",
     cta: "Start a Residential Project",
-    bg: img("1600607687939-ce8a6c25118c", 1200),
+    image: "split_residential" as SiteImageKey,
   },
 ];
 
@@ -69,13 +68,15 @@ const PROCESS = [
 const ABOUT_LIST = ["General Contracting", "Construction & Remodeling", "Finishes & Painting", "HVAC & Plumbing", "Welding & Fencing", "Property Improvements"];
 
 export function Home() {
+  const images = useSiteImages();
+
   useEffect(() => {
     if (window.location.hash) document.querySelector(window.location.hash)?.scrollIntoView();
   }, []);
 
   return (
     <main>
-      <section className="hero" id="home">
+      <section className="hero" id="home" style={{ "--hero-bg": `url('${images.hero}')` } as CSSProperties}>
         <div className="container hero-content">
           <p className="eyebrow eyebrow-light">Commercial &amp; Residential General Contracting</p>
           <h1>Built Right.<br /><span>Managed Right.</span></h1>
@@ -113,7 +114,7 @@ export function Home() {
           <div className="gc-grid">
             {GC_CARDS.map((c) => (
               <article className="gc-card" key={c.title}>
-                <img src={c.src} alt={c.alt} loading="lazy" width={900} height={600} />
+                <img src={images[c.image]} alt={c.alt} loading="lazy" width={900} height={600} />
                 <div className="gc-card-body">
                   <p className="card-kicker">{c.kicker}</p>
                   <h3>{c.title}</h3>
@@ -151,7 +152,7 @@ export function Home() {
 
       <section className="split" aria-label="Commercial and residential">
         {SPLIT.map((s) => (
-          <article className="split-panel" key={s.title} style={{ "--bg": `url('${s.bg}')` } as CSSProperties}>
+          <article className="split-panel" key={s.title} style={{ "--bg": `url('${images[s.image]}')` } as CSSProperties}>
             <div className="split-inner">
               <p className="eyebrow eyebrow-light">{s.eyebrow}</p>
               <h2>{s.title}</h2>
@@ -202,7 +203,7 @@ export function Home() {
       <section className="section" id="about">
         <div className="container about">
           <div className="about-media">
-            <img src={img("1503387762-592deb58ef4e", 1000)} alt="Contractor reviewing construction plans" loading="lazy" />
+            <img src={images.about} alt="Contractor reviewing construction plans" loading="lazy" />
           </div>
           <div className="about-copy">
             <p className="eyebrow">About Metroplex</p>

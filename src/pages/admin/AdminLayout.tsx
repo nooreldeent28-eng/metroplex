@@ -8,6 +8,7 @@ const NAV = [
   { to: "/admin", label: "Dashboard" },
   { to: "/admin/gallery", label: "Gallery" },
   { to: "/admin/new", label: "Add Project" },
+  { to: "/admin/site-photos", label: "Site Photos" },
 ];
 
 export function AdminLayout({ children }: { children: ReactNode }) {
